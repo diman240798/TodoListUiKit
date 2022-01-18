@@ -9,6 +9,8 @@ import UIKit
 
 class MainViewController : UIViewController {
     
+    @IBOutlet let tableView: UITableView
+    
     override func viewDidLoad() {
         
     }
