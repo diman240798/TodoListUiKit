@@ -63,9 +63,9 @@ extension MainViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            if let cell = tableView.cellForRow(at: indexPath) as? CompletedTaskCell {
-                cell.checked.setImage(UIImage(named: "ic_checkbox_checked")!, for: .normal)
-            }
+            let newVc = storyboard!.instantiateViewController(withIdentifier: "DetailsViewController")
+            navigationController?.pushViewController(newVc, animated: true)
+            break
         case 1:
             break
         default: break

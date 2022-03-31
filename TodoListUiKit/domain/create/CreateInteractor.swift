@@ -1,5 +1,5 @@
 //
-//  MainInteractor.swift
+//  CreateInteractor.swift
 //  TodoListUiKit
 //
 //  Created by firecode id2 on 31.03.2022.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol MainInteractor {
-    func getTasks() -> Array<Task>
+protocol CreateInteractor {
+    func createTask(_ task: Task)
 }
 
-class MainInteractorImp : MainInteractor {
+class CreateInteractorImpl : CreateInteractor {
     
     let repo: TaskRepository
     
@@ -19,7 +19,7 @@ class MainInteractorImp : MainInteractor {
         self.repo = repo
     }
     
-    func getTasks() -> Array<Task> {
-        return repo.getTasks()
+    func createTask(_ task: Task) {
+        repo.createTask(task)
     }
 }

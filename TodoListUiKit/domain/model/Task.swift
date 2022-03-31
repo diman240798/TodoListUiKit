@@ -13,15 +13,15 @@ class Task {
     let name: String
     let isComplete: Bool
     
+    init(_ name: String) {
+        self.id = -1
+        self.name = name
+        self.isComplete = false
+    }
+    
     init(_ id: Int, _ name: String, _ isComplete: Bool) {
         self.id = id
         self.name = name
         self.isComplete = isComplete
-    }
-    
-    init(_ entity: TaskEntity) {
-        self.id = entity.id
-        self.name = entity.name
-        self.isComplete = entity.isComplete
     }
 }

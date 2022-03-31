@@ -17,4 +17,17 @@ class TaskEntity {
         self.name = name
         self.isComplete = isComplete
     }
+    
+    init(_ entity: Task) {
+        self.id = entity.id
+        self.name = entity.name
+        self.isComplete = entity.isComplete
+    }
+}
+
+extension TaskEntity {
+    
+    func toTask() -> Task {
+        return Task(id, name, isComplete)
+    }
 }
