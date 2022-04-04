@@ -18,14 +18,27 @@ class CreateViewModel {
     }
     
     func createTask() {
-        interactor.createTask(Task(model.name))
+        let task = model.toTask()
+        interactor.createTask(task)
     }
     
-    func setName(name: String) {
+    func setName(_ name: String) {
         model.name = name
+    }
+    
+    func setDescription(_ description: String) {
+        model.description = description
     }
 }
 
-class TaskModel {
+struct TaskModel {
     var name: String = ""
+    var description: String = ""
+}
+
+extension TaskModel {
+    
+    func toTask() -> Task {
+        return Task(name, description)
+    }
 }

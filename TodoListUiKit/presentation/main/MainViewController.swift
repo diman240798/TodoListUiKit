@@ -13,6 +13,14 @@ class MainViewController : UIViewController {
     @IBOutlet weak var count: UITextView!
     @IBOutlet weak var tableView: UITableView!
     
+    lazy var faButton: UIButton = {
+        let button = UIButton(frame: .zero)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "ic_plus"), for: .normal)
+        button.addTarget(self, action: #selector(fabTapped(_:)), for: .touchUpInside)
+        return button
+    }()
+    
     let viewModel = MainViewModel(
         MainInteractorImp(TaskRepositoryImpl())
     )
@@ -20,6 +28,7 @@ class MainViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDate()
+        setupFab()
         setupTableView()
         loadData()
     }
@@ -34,12 +43,28 @@ class MainViewController : UIViewController {
         self.date.text = "\(monthName) \(day), \(year)"
     }
     
+    func setupFab() {
+        view.addSubview(faButton)
+        NSLayoutConstraint.activate([
+            faButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -36),
+            faButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -36),
+            faButton.heightAnchor.constraint(equalToConstant: 80),
+            faButton.widthAnchor.constraint(equalToConstant: 80)
+        ])
+    }
+    
     
     func loadData() {
         viewModel.loadTasks()
         count.text = "\(viewModel.incompleteTasks.count) incomplete, \(viewModel.completedTasks.count) completed"
         tableView.reloadData()
     }
+    
+    @objc func fabTapped(_ button: UIButton) {
+        let newVc = storyboard!.instantiateViewController(withIdentifier: "CreateViewController")
+        navigationController?.pushViewController(newVc, animated: true)
+    }
+    
 }
 
 extension MainViewController : UITableViewDelegate, UITableViewDataSource {
@@ -51,7 +76,7 @@ extension MainViewController : UITableViewDelegate, UITableViewDataSource {
         tableView.register(completedCelReg, forCellReuseIdentifier: CompletedTaskCell.id)
         let incompleteCelReg = UINib(nibName: "IncompleteTaskCell", bundle: nil)
         tableView.register(incompleteCelReg, forCellReuseIdentifier: IncompleteTaskCell.id)
-    
+        
         tableView.dataSource = self
         tableView.delegate = self
     }

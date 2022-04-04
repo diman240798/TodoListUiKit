@@ -15,8 +15,8 @@ protocol TaskRepository {
 class TaskRepositoryImpl : TaskRepository {
     
     var tasks = [
-        TaskEntity(0, "Clean Room", true),
-        TaskEntity(1, "Feed cat", false)
+        TaskEntity(0, "Clean Room", "Description", true),
+        TaskEntity(1, "Feed cat", "Description", false)
     ]
     
     func createTask(_ task: Task) {
