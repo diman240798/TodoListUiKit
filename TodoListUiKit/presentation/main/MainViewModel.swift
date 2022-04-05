@@ -15,8 +15,8 @@ class MainViewModel {
         self.interactor = interactor
     }
     
-    var completedTasks: Array<Task> = []
-    var incompleteTasks: Array<Task> = []
+    var completedTasks: [Task] = []
+    var incompleteTasks: [Task] = []
     
     func loadTasks() {
         completedTasks.removeAll()

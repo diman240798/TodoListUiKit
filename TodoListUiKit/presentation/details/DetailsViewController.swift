@@ -5,9 +5,13 @@
 //  Created by firecode id2 on 31.03.2022.
 //
 
-import Foundation
+import UIKit
 
 class DetailsViewController : ViewController {
+    
+    @IBOutlet weak var nameText: UITextField!
+    @IBOutlet weak var descriptionText: UITextView!
+    
     
     let viewModel = DetailsViewModel(
         DetailsInteractorImpl(AppDelegate.taskRepository)
@@ -25,5 +29,7 @@ class DetailsViewController : ViewController {
     
     func loadData() {
         let task = viewModel.getTask(id: taskId)
+        nameText.text = task.name
+        descriptionText.text = task.description
     }
 }

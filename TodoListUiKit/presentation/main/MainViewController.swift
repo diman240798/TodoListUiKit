@@ -70,13 +70,12 @@ class MainViewController : UIViewController {
     
     func loadData() {
         viewModel.loadTasks()
-        count.text = "\(viewModel.incompleteTasks.count) incomplete, \(viewModel.completedTasks.count) completed"
+        count.text = "\(viewModel.completedTasks.count) completed, \(viewModel.incompleteTasks.count) incomplete"
         tableView.reloadData()
     }
     
     @objc func fabTapped(_ button: UIButton) {
-        let newVc = storyboard!.instantiateViewController(withIdentifier: "CreateViewController")
-        navigationController?.pushViewController(newVc, animated: true)
+        performSegue(withIdentifier: "toCreate", sender: nil)
     }
     
 }
@@ -100,16 +99,18 @@ extension MainViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var task: Task? = nil
         switch indexPath.section {
         case 0:
-            performSegue(withIdentifier: "toDetails", sender: viewModel.incompleteTasks[indexPath.row])
-//            let newVc = storyboard!.instantiateViewController(withIdentifier: "DetailsViewController")
-//            navigationController?.pushViewController(newVc, animated: true)
+            task = viewModel.completedTasks[indexPath.row]
             break
         case 1:
-            loadData()
+            task = viewModel.incompleteTasks[indexPath.row]
             break
         default: break
+        }
+        if let clickedTask = task {
+            performSegue(withIdentifier: "toDetails", sender: clickedTask)
         }
     }
     
