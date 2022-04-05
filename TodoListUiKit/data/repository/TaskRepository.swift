@@ -9,7 +9,8 @@ import Foundation
 
 protocol TaskRepository {
     func createTask(_ task: Task)
-    func getTasks() -> Array<Task>
+    func getTask(_ id: Int) -> Task
+    func getTasks() -> [Task]
 }
 
 class TaskRepositoryImpl : TaskRepository {
@@ -23,7 +24,13 @@ class TaskRepositoryImpl : TaskRepository {
         tasks.append(TaskEntity(task))
     }
     
-    func getTasks() -> Array<Task> {
+    func getTask(_ id: Int) -> Task {
+        return tasks
+            .first(where: { $0.id == id })!
+            .toTask()
+    }
+    
+    func getTasks() -> [Task] {
         return tasks.map {
             $0.toTask()
         }

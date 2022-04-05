@@ -22,15 +22,29 @@ class MainViewController : UIViewController {
     }()
     
     let viewModel = MainViewModel(
-        MainInteractorImp(TaskRepositoryImpl())
+        MainInteractorImp(AppDelegate.taskRepository)
     )
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDate()
         setupFab()
         setupTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         loadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toDetails" {
+            if let vc = segue.destination as? DetailsViewController {
+                if let task = sender as? Task {
+                    vc.taskId = task.id
+                }
+            }
+        }
     }
     
     func setupDate() {
@@ -88,10 +102,12 @@ extension MainViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            let newVc = storyboard!.instantiateViewController(withIdentifier: "DetailsViewController")
-            navigationController?.pushViewController(newVc, animated: true)
+            performSegue(withIdentifier: "toDetails", sender: viewModel.incompleteTasks[indexPath.row])
+//            let newVc = storyboard!.instantiateViewController(withIdentifier: "DetailsViewController")
+//            navigationController?.pushViewController(newVc, animated: true)
             break
         case 1:
+            loadData()
             break
         default: break
         }

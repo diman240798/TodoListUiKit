@@ -6,3 +6,18 @@
 //
 
 import Foundation
+import UIKit
+
+class DetailsViewModel {
+    
+    let interactor: DetailsInteractor
+    
+    init(_ interactor: DetailsInteractor) {
+        self.interactor = interactor
+    }
+    
+    func getTask(id: Int) -> Task {
+        return interactor.getTask(id)
+    }
+    
+}
