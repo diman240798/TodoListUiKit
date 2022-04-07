@@ -17,7 +17,7 @@ class DetailsViewController : ViewController {
         DetailsInteractorImpl(AppDelegate.taskRepository)
     )
     
-    var taskId = -1
+    var taskId = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()

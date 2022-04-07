@@ -9,19 +9,19 @@ import Foundation
 import UIKit
 
 class Task {
-    let id: Int
+    let id: String
     let name: String
     let description: String
     let isComplete: Bool
     
     init(_ name: String, _ description: String) {
-        self.id = -1
+        self.id = UUID().uuidString
         self.name = name
         self.description = description
         self.isComplete = false
     }
     
-    init(_ id: Int, _ name: String, _ description: String, _ isComplete: Bool) {
+    init(_ id: String, _ name: String, _ description: String, _ isComplete: Bool) {
         self.id = id
         self.name = name
         self.description = description

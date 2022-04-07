@@ -8,7 +8,7 @@
 import Foundation
 
 protocol DetailsInteractor {
-    func getTask(_ id: Int) -> Task
+    func getTask(_ id: String) -> Task
     func setTaskComplete(taskId: Int)
     func setTaskIncomplete(taskId: Int)
 }
@@ -21,7 +21,7 @@ class DetailsInteractorImpl : DetailsInteractor {
         self.repo = repo
     }
     
-    func getTask(_ id: Int) -> Task {
+    func getTask(_ id: String) -> Task {
         return repo.getTask(id)
     }
     

@@ -10,7 +10,7 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    static let taskRepository = TaskRepositoryImpl()
+    static let taskRepository = TaskRepositoryRealmImplementaiton()
 
 
 

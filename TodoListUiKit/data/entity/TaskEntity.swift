@@ -8,29 +8,33 @@
 import Foundation
 
 class TaskEntity {
-    let id: Int
-    let name: String
-    let description: String
-    let isComplete: Bool
-    
-    init(_ id: Int, _ name: String, _ description: String, _ isComplete: Bool) {
-        self.id = id
-        self.name = name
-        self.description = description
-        self.isComplete = isComplete
-    }
-    
-    init(_ entity: Task) {
-        self.id = entity.id
-        self.name = entity.name
-        self.description = entity.description
-        self.isComplete = entity.isComplete
-    }
+    dynamic var id = UUID().uuidString
+    dynamic var name: String = ""
+    dynamic var descriptionText: String = ""
+    dynamic var isComplete: Bool = false
 }
 
 extension TaskEntity {
     
+    static func createTask(_ id: String, _ name: String, _ description: String, _ isComplete: Bool) -> TaskEntity {
+        let task = TaskEntity()
+        task.id = id
+        task.name = name
+        task.descriptionText = description
+        task.isComplete = isComplete
+        return task
+    }
+    
+    static func createTask(_ model: Task) -> TaskEntity {
+        let task = TaskEntity()
+        task.id = model.id
+        task.name = model.name
+        task.descriptionText = model.description
+        task.isComplete = model.isComplete
+        return task
+    }
+    
     func toTask() -> Task {
-        return Task(id, name, description, isComplete)
+        return Task(id, name, descriptionText, isComplete)
     }
 }
