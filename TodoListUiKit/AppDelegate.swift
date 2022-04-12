@@ -6,34 +6,69 @@
 //
 
 import UIKit
+import Swinject
+import SwinjectStoryboard
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    static let taskRepository = TaskRepositoryRealmImplementaiton()
-
-
-
+    var window: UIWindow?
+    let container = SwinjectStoryboard.defaultContainer
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch
-//        if #available(iOS 13.0, *) {
-//            window?.overrideUserInterfaceStyle = .light
-//        }
+        self.registerDependencies()
+        self.injectDependencies()
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.makeKeyAndVisible()
+        self.window = window
+        
+        let storyboard = SwinjectStoryboard.create(name: "Main", bundle: nil, container: self.container)
+        window.rootViewController = storyboard.instantiateInitialViewController()
         
         return true
     }
-
-    // MARK: UISceneSession Lifecycle
-
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+    
+    private func registerDependencies() {
+        // repo
+        container.register(TaskRepository.self) { _ in TaskRepositoryRealmImplementaiton() }.inObjectScope(.container)
+        // main
+        container.register(MainInteractor.self) { r in
+            MainInteractorImpl(r.resolve(TaskRepository.self)!)
+        }
+        container.register(MainViewModel.self) { r in
+            MainViewModel(r.resolve(MainInteractor.self)!)
+        }
+        // details
+        container.register(DetailsInteractor.self) { r in
+            DetailsInteractorImpl(r.resolve(TaskRepository.self)!)
+        }
+        container.register(DetailsViewModel.self) { r in
+            DetailsViewModel(r.resolve(DetailsInteractor.self)!)
+        }
+        // create
+        container.register(CreateInteractor.self) { r in
+            CreateInteractorImpl(r.resolve(TaskRepository.self)!)
+        }
+        container.register(CreateViewModel.self) { r in
+            CreateViewModel(r.resolve(CreateInteractor.self)!)
+        }
     }
-
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    
+    private func injectDependencies() {
+        // main
+        container.storyboardInitCompleted(MainViewController.self) { r, c in
+            let viewModel = r.resolve(MainViewModel.self)
+            c.viewModel = viewModel
+        }
+        // details
+        container.storyboardInitCompleted(DetailsViewController.self) { r, c in
+            let viewModel = r.resolve(DetailsViewModel.self)
+            c.viewModel = viewModel
+        }
+        // create
+        container.storyboardInitCompleted(CreateViewController.self) { r, c in
+            let viewModel = r.resolve(CreateViewModel.self)
+            c.viewModel = viewModel
+        }
     }
 }

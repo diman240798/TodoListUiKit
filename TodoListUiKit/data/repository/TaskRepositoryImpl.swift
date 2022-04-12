@@ -9,6 +9,10 @@ import Foundation
 
 class TaskRepositoryImpl : TaskRepository {
     
+    required init() {
+        print("Create TaskRepositoryImpl")
+    }
+    
     var tasks = [
         TaskEntity.createTask(UUID().uuidString, "Clean Room", "Description", true),
         TaskEntity.createTask(UUID().uuidString, "Feed cat", "Description", false)

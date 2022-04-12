@@ -11,7 +11,7 @@ protocol MainInteractor {
     func getTasks() -> Array<Task>
 }
 
-class MainInteractorImp : MainInteractor {
+class MainInteractorImpl : MainInteractor {
     
     let repo: TaskRepository
     

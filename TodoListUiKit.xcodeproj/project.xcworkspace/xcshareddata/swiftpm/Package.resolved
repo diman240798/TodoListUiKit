@@ -2,21 +2,39 @@
   "object": {
     "pins": [
       {
-        "package": "RealmCore",
+        "package": "RealmDatabase",
         "repositoryURL": "https://github.com/realm/realm-core",
         "state": {
           "branch": null,
-          "revision": "66d79b3c5213fb14d491c1b22193077b488d49a6",
-          "version": "6.2.4"
+          "revision": "3c78cccdc0d9f967c5c15b7f3ea081814e2b3ef2",
+          "version": "11.13.0"
         }
       },
       {
         "package": "Realm",
         "repositoryURL": "https://github.com/realm/realm-swift.git",
         "state": {
-          "branch": null,
-          "revision": "2dce752b48c3265c63ab04a8c66ddfdf9185f847",
-          "version": "5.5.2"
+          "branch": "master",
+          "revision": "8c1cbf124c5025da9220595e7764059963065891",
+          "version": null
+        }
+      },
+      {
+        "package": "Swinject",
+        "repositoryURL": "https://github.com/Swinject/Swinject",
+        "state": {
+          "branch": "master",
+          "revision": "f10b6e9ebff440f985c43008f7c2d097639fcb81",
+          "version": null
+        }
+      },
+      {
+        "package": "SwinjectStoryboard",
+        "repositoryURL": "https://github.com/Swinject/SwinjectStoryboard",
+        "state": {
+          "branch": "master",
+          "revision": "47df16142f8f9ce54a54bd61d04ae5c93d9de8eb",
+          "version": null
         }
       }
     ]

@@ -9,16 +9,16 @@ import UIKit
 
 class CreateViewController : ViewController {
     
+    @IBOutlet weak var dateText: UILabel!
     @IBOutlet weak var nameText: UITextField!
     @IBOutlet weak var descriptionText: UITextView!
     @IBOutlet weak var addBtn: UIButton!
     
-    let viewModel = CreateViewModel(
-        CreateInteractorImpl(AppDelegate.taskRepository)
-    )
+    var viewModel: CreateViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dateText.text = DateUtils.getDate()
         addBtn.addTarget(self, action: #selector(addTaskClicked(_:)), for: .touchUpInside)
         nameText.addTarget(self, action: #selector(nameChanged(_:)), for: .editingChanged)
         descriptionText.delegate = self

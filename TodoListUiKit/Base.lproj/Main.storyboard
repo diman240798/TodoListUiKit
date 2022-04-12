@@ -165,6 +165,7 @@
                     <navigationItem key="navigationItem" id="mXR-2P-c8M"/>
                     <connections>
                         <outlet property="addBtn" destination="yo3-rX-HE7" id="0T9-o4-efA"/>
+                        <outlet property="dateText" destination="pJx-x5-8nw" id="zeF-Wn-i4T"/>
                         <outlet property="descriptionText" destination="95z-OM-bVd" id="Ieu-YM-Sqg"/>
                         <outlet property="nameText" destination="5ts-gO-h9g" id="eLg-At-G4k"/>
                     </connections>
@@ -242,6 +243,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="74n-Zf-v0L"/>
                     <connections>
+                        <outlet property="dateText" destination="aq9-Gg-cPO" id="WFq-HN-AFs"/>
                         <outlet property="descriptionText" destination="mSm-Ff-quk" id="Y1q-JC-e59"/>
                         <outlet property="nameText" destination="CAr-Ff-GmI" id="TEO-Zb-lq4"/>
                     </connections>

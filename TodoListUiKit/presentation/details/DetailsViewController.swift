@@ -9,18 +9,18 @@ import UIKit
 
 class DetailsViewController : ViewController {
     
+    @IBOutlet weak var dateText: UILabel!
     @IBOutlet weak var nameText: UITextField!
     @IBOutlet weak var descriptionText: UITextView!
     
     
-    let viewModel = DetailsViewModel(
-        DetailsInteractorImpl(AppDelegate.taskRepository)
-    )
+    var viewModel: DetailsViewModel!
     
     var taskId = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dateText.text = DateUtils.getDate()
     }
     
     override func viewDidAppear(_ animated: Bool) {

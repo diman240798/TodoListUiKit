@@ -9,6 +9,7 @@ import UIKit
 
 class MainViewController : UIViewController {
     
+    
     @IBOutlet weak var date: UITextView!
     @IBOutlet weak var count: UITextView!
     @IBOutlet weak var tableView: UITableView!
@@ -21,19 +22,13 @@ class MainViewController : UIViewController {
         return button
     }()
     
-    let viewModel = MainViewModel(
-        MainInteractorImp(AppDelegate.taskRepository)
-    )
-
+    var viewModel: MainViewModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupDate()
+        date.text = DateUtils.getDate()
         setupFab()
         setupTableView()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         loadData()
     }
     
@@ -45,16 +40,6 @@ class MainViewController : UIViewController {
                 }
             }
         }
-    }
-    
-    func setupDate() {
-        let date = Date()
-        let calendar = Calendar.current
-        let monthNumber = calendar.component(.month, from: date)
-        let monthName = DateFormatter().monthSymbols[monthNumber - 1]
-        let day = calendar.component(.day, from: date)
-        let year = calendar.component(.year, from: date)
-        self.date.text = "\(monthName) \(day), \(year)"
     }
     
     func setupFab() {
