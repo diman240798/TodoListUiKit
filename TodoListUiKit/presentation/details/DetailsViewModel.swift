@@ -16,8 +16,7 @@ class DetailsViewModel {
         self.interactor = interactor
     }
     
-    func getTask(id: String) -> Task {
-        return interactor.getTask(id)
+    func getTask(id: String) {
+//        return interactor.getTask(id)
     }
-    
 }

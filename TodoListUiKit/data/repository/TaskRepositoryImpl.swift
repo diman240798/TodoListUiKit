@@ -7,30 +7,30 @@
 
 import Foundation
 
-class TaskRepositoryImpl : TaskRepository {
-    
-    required init() {
-        print("Create TaskRepositoryImpl")
-    }
-    
-    var tasks = [
-        TaskEntity.createTask(UUID().uuidString, "Clean Room", "Description", true),
-        TaskEntity.createTask(UUID().uuidString, "Feed cat", "Description", false)
-    ]
-    
-    func createTask(_ task: Task) {
-        tasks.append(TaskEntity.createTask(task))
-    }
-    
-    func getTask(_ id: String) -> Task {
-        return tasks
-            .first(where: { $0.id == id })!
-            .toTask()
-    }
-    
-    func getTasks() -> [Task] {
-        return tasks.map {
-            $0.toTask()
-        }
-    }
-}
+//class TaskRepositoryImpl : TaskRepository {
+//
+//    required init() {
+//        print("Create TaskRepositoryImpl")
+//    }
+//
+//    var tasks = [
+//        TaskEntity.createTask(UUID().uuidString, "Clean Room", "Description", true),
+//        TaskEntity.createTask(UUID().uuidString, "Feed cat", "Description", false)
+//    ]
+//
+//    func createTask(_ task: Task) {
+//        tasks.append(TaskEntity.createTask(task))
+//    }
+//
+//    func getTask(_ id: String) -> Task {
+//        return tasks
+//            .first(where: { $0.id == id })!
+//            .toTask()
+//    }
+//
+//    func getTasks() -> [Task] {
+//        return tasks.map {
+//            $0.toTask()
+//        }
+//    }
+//}

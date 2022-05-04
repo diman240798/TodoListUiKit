@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import RxSwift
 
 protocol TaskRepository {
     func createTask(_ task: Task)
-    func getTask(_ id: String) -> Task
-    func getTasks() -> [Task]
+    func getTask(_ id: String) -> Observable<Task>
+    func getTasks() -> Observable<[Task]>
 }

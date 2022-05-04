@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import RxSwift
 
 protocol MainInteractor {
-    func getTasks() -> Array<Task>
+    func getTasks() -> Observable<[Task]>
 }
 
 class MainInteractorImpl : MainInteractor {
@@ -19,7 +20,7 @@ class MainInteractorImpl : MainInteractor {
         self.repo = repo
     }
     
-    func getTasks() -> Array<Task> {
+    func getTasks() -> Observable<[Task]> {
         return repo.getTasks()
     }
 }

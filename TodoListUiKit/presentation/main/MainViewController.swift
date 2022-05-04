@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class MainViewController : UIViewController {
     
+    let disposeBag = DisposeBag()
     
     @IBOutlet weak var date: UITextView!
     @IBOutlet weak var count: UITextView!
@@ -29,7 +32,7 @@ class MainViewController : UIViewController {
         date.text = DateUtils.getDate()
         setupFab()
         setupTableView()
-        loadData()
+        setTitle()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -53,10 +56,8 @@ class MainViewController : UIViewController {
     }
     
     
-    func loadData() {
-        viewModel.loadTasks()
-        count.text = "\(viewModel.completedTasks.count) completed, \(viewModel.incompleteTasks.count) incomplete"
-        tableView.reloadData()
+    func setTitle() {
+        // count.text = "\(viewModel.completedTasks.count) completed, \(viewModel.incompleteTasks.count) incomplete"
     }
     
     @objc func fabTapped(_ button: UIButton) {
@@ -65,7 +66,7 @@ class MainViewController : UIViewController {
     
 }
 
-extension MainViewController : UITableViewDelegate, UITableViewDataSource {
+extension MainViewController {
     
     func setupTableView() {
         
@@ -75,56 +76,80 @@ extension MainViewController : UITableViewDelegate, UITableViewDataSource {
         let incompleteCelReg = UINib(nibName: "IncompleteTaskCell", bundle: nil)
         tableView.register(incompleteCelReg, forCellReuseIdentifier: IncompleteTaskCell.id)
         
-        tableView.dataSource = self
-        tableView.delegate = self
+        
+        viewModel.tasks.bind(to: tableView.rx.items) { (tableView, row, element) in
+            let indexPath = IndexPath(row: row, section: 0)
+            
+            if element.isComplete {
+                let cell = tableView.dequeueReusableCell(withIdentifier: CompletedTaskCell.id, for: indexPath) as! CompletedTaskCell
+                cell.name.text = element.name
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: IncompleteTaskCell.id, for: indexPath) as! IncompleteTaskCell
+                cell.name.text = element.name
+                return cell
+            }
+            
+        }
+        .disposed(by: disposeBag)
+        
+        tableView.rx.modelSelected(Task.self)
+            .subscribe(onNext: { [weak self] task in
+                self?.onTaskClicked(task)
+            }).disposed(by: disposeBag)
+        
+    }
+    
+    func onTaskClicked(_ task: Task) {
+        performSegue(withIdentifier: "toDetails", sender: task)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var task: Task? = nil
-        switch indexPath.section {
-        case 0:
-            task = viewModel.completedTasks[indexPath.row]
-            break
-        case 1:
-            task = viewModel.incompleteTasks[indexPath.row]
-            break
-        default: break
-        }
-        if let clickedTask = task {
-            performSegue(withIdentifier: "toDetails", sender: clickedTask)
-        }
-    }
+    //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    //        var task: Task? = nil
+    //        switch indexPath.section {
+    //        case 0:
+    //            //task = viewModel.completedTasks[indexPath.row]
+    //            break
+    //        case 1:
+    //            //task = viewModel.incompleteTasks[indexPath.row]
+    //            break
+    //        default: break
+    //        }
+    //        if let clickedTask = task {
+    //            performSegue(withIdentifier: "toDetails", sender: clickedTask)
+    //        }
+    //    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return viewModel.completedTasks.count
+            return 0 // viewModel.completedTasks.count
         case 1:
-            return viewModel.incompleteTasks.count
+            return 0 // viewModel.incompleteTasks.count
         default: return 0
         }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0:
-            if let cell = tableView.dequeueReusableCell(withIdentifier: CompletedTaskCell.id, for: indexPath) as? CompletedTaskCell {
-                cell.name.text = viewModel.completedTasks[indexPath.row].name
-                return cell
-            }
-        case 1:
-            if let cell = tableView.dequeueReusableCell(withIdentifier: IncompleteTaskCell.id, for: indexPath) as? IncompleteTaskCell {
-                cell.name.text = viewModel.incompleteTasks[indexPath.row].name
-                return cell
-            }
-        default: return UITableViewCell()
-        }
-        return UITableViewCell()
-    }
+    //    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    //        switch indexPath.section {
+    //        case 0:
+    //            if let cell = tableView.dequeueReusableCell(withIdentifier: CompletedTaskCell.id, for: indexPath) as? CompletedTaskCell {
+    //                //cell.name.text = viewModel.completedTasks[indexPath.row].name
+    //                return cell
+    //            }
+    //        case 1:
+    //            if let cell = tableView.dequeueReusableCell(withIdentifier: IncompleteTaskCell.id, for: indexPath) as? IncompleteTaskCell {
+    //                //cell.name.text = viewModel.incompleteTasks[indexPath.row].name
+    //                return cell
+    //            }
+    //        default: return UITableViewCell()
+    //        }
+    //        return UITableViewCell()
+    //    }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section

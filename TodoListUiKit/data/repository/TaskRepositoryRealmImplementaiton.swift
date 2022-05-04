@@ -7,14 +7,15 @@
 
 import Foundation
 import RealmSwift
-
+import RxRealm
+import RxSwift
 
 class TaskRepositoryRealmImplementaiton : TaskRepository {
     
     let realm = try! Realm()
     
     init() {
-        if getTasks().isEmpty {
+        if realm.objects(TaskRealmEntity.self).isEmpty {
             createTask(Task(UUID().uuidString, "Clean Room", "Description", true))
             createTask(Task(UUID().uuidString, "Feed cat", "Description", false))
         }
@@ -26,14 +27,16 @@ class TaskRepositoryRealmImplementaiton : TaskRepository {
         try! realm.commitWrite()
     }
     
-    func getTask(_ id: String) -> Task {
-        return realm.objects(TaskRealmEntity.self)
-            .first(where: { $0.id == id })!
-            .toTask()
+    func getTask(_ id: String) -> Observable<Task> {
+        
+        return Observable.from(realm.objects(TaskRealmEntity.self))
+            .filter { $0.id == id }
+            .take(1)
+            .map {$0.toTask()}
     }
     
-    func getTasks() -> [Task] {
-        return realm.objects(TaskRealmEntity.self)
-            .map { $0.toTask() }
+    func getTasks() -> Observable<[Task]> {
+        return Observable.collection(from: realm.objects(TaskRealmEntity.self))
+            .map { $0.map { $0.toTask() } }
     }
 }

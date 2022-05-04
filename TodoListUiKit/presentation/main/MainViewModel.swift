@@ -6,28 +6,41 @@
 //
 
 import UIKit
+import RxSwift
 
 class MainViewModel {
     
     let interactor: MainInteractor
+   
+    let tasks: Observable<[Task]>
+    
+    
+    var completedTasks: Observable<[Task]> = Observable.of([])
+    var incompleteTasks: Observable<[Task]> = Observable.of([])
+    
     
     init(_ interactor: MainInteractor) {
         self.interactor = interactor
+        tasks = interactor.getTasks()
+            .observe(on: MainScheduler.instance)
     }
     
-    var completedTasks: [Task] = []
-    var incompleteTasks: [Task] = []
+
+    
     
     func loadTasks() {
-        completedTasks.removeAll()
-        incompleteTasks.removeAll()
-        interactor.getTasks().forEach { task in
-            if (task.isComplete) {
-                completedTasks.append(task)
-            } else {
-                incompleteTasks.append(task)
-            }
-        }
+//        interactor.getTasks()
+//            .observe(on: MainScheduler.instance)
+//            .subscribe { (tasks: [Task]) in
+//                var completedTasks: [Task] = []
+//                var incompleteTasks: [Task] = []
+//                tasks.forEach { task in
+//                    if (task.isComplete) {
+//                        completedTasks.append(task)
+//                    } else {
+//                        incompleteTasks.append(task)
+//                    }
+//                }
+//            }
     }
-    
 }

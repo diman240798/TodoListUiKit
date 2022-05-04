@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import RxSwift
 
 protocol DetailsInteractor {
-    func getTask(_ id: String) -> Task
+    func getTask(_ id: String) -> Observable<Task>
     func setTaskComplete(taskId: Int)
     func setTaskIncomplete(taskId: Int)
 }
@@ -21,7 +22,7 @@ class DetailsInteractorImpl : DetailsInteractor {
         self.repo = repo
     }
     
-    func getTask(_ id: String) -> Task {
+    func getTask(_ id: String) -> Observable<Task> {
         return repo.getTask(id)
     }
     

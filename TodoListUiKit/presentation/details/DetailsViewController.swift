@@ -28,8 +28,8 @@ class DetailsViewController : ViewController {
     }
     
     func loadData() {
-        let task = viewModel.getTask(id: taskId)
-        nameText.text = task.name
-        descriptionText.text = task.description
+//        let task = viewModel.getTask(id: taskId)
+//        nameText.text = task.name
+//        descriptionText.text = task.description
     }
 }
