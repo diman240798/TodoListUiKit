@@ -7,40 +7,42 @@
 
 import UIKit
 import RxSwift
+import RxDataSources
 
 class MainViewModel {
     
     let interactor: MainInteractor
-   
-    let tasks: Observable<[Task]>
     
+    let tasks = BehaviorSubject<[SectionModel<TaskSection, TaskItem>]>(value: [])
     
-    var completedTasks: Observable<[Task]> = Observable.of([])
-    var incompleteTasks: Observable<[Task]> = Observable.of([])
-    
+    let tasksCount = BehaviorSubject<TaskCount>(value: TaskCount(0, 0))
     
     init(_ interactor: MainInteractor) {
         self.interactor = interactor
-        tasks = interactor.getTasks()
-            .observe(on: MainScheduler.instance)
-    }
-    
-
-    
-    
-    func loadTasks() {
-//        interactor.getTasks()
-//            .observe(on: MainScheduler.instance)
-//            .subscribe { (tasks: [Task]) in
-//                var completedTasks: [Task] = []
-//                var incompleteTasks: [Task] = []
-//                tasks.forEach { task in
-//                    if (task.isComplete) {
-//                        completedTasks.append(task)
-//                    } else {
-//                        incompleteTasks.append(task)
-//                    }
-//                }
-//            }
+        interactor.getTasks()
+            .subscribe(onNext: { tasks in
+                var completedTasks = [TaskItem]()
+                var incompleteTasks = [TaskItem]()
+                
+                tasks.forEach {task in
+                    if task.isComplete {
+                        completedTasks.append(TaskItem.completed(task))
+                    } else {
+                        incompleteTasks.append(TaskItem.incomplete(task))
+                    }
+                }
+                
+                self.tasksCount.onNext(TaskCount(completedTasks.count, incompleteTasks.count))
+                self.tasks.onNext(
+                    [
+                        SectionModel<TaskSection, TaskItem>(
+                            model: .completed, items: completedTasks
+                        ),
+                        SectionModel<TaskSection, TaskItem>(
+                            model: .incomplete, items: incompleteTasks
+                        )
+                    ]
+                )
+            })
     }
 }

@@ -13,6 +13,10 @@
 		8217377D2784717A004D0BA6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8217377B2784717A004D0BA6 /* Main.storyboard */; };
 		8217377F2784717B004D0BA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8217377E2784717B004D0BA6 /* Assets.xcassets */; };
 		821737822784717B004D0BA6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 821737802784717B004D0BA6 /* LaunchScreen.storyboard */; };
+		8219E843282D2F460014F020 /* TaskSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8219E842282D2F460014F020 /* TaskSection.swift */; };
+		8219E845282D2FA30014F020 /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8219E844282D2FA30014F020 /* TaskItem.swift */; };
+		8219E847282D3E5D0014F020 /* TaskCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8219E846282D3E5D0014F020 /* TaskCount.swift */; };
+		821A3C1E2823F5C500AA3E83 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 821A3C1D2823F5C500AA3E83 /* RxDataSources */; };
 		8232DA1627F5921F00CA82FB /* IncompleteTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232DA1427F5921F00CA82FB /* IncompleteTaskCell.swift */; };
 		8232DA1727F5921F00CA82FB /* IncompleteTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8232DA1527F5921F00CA82FB /* IncompleteTaskCell.xib */; };
 		8232DA1B27F59D2700CA82FB /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232DA1A27F59D2700CA82FB /* Task.swift */; };
@@ -64,6 +68,9 @@
 		8217377E2784717B004D0BA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		821737812784717B004D0BA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		821737832784717B004D0BA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8219E842282D2F460014F020 /* TaskSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSection.swift; sourceTree = "<group>"; };
+		8219E844282D2FA30014F020 /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
+		8219E846282D3E5D0014F020 /* TaskCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCount.swift; sourceTree = "<group>"; };
 		8232DA1427F5921F00CA82FB /* IncompleteTaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncompleteTaskCell.swift; sourceTree = "<group>"; };
 		8232DA1527F5921F00CA82FB /* IncompleteTaskCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncompleteTaskCell.xib; sourceTree = "<group>"; };
 		8232DA1A27F59D2700CA82FB /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
@@ -96,6 +103,7 @@
 				82D28885280063AA00BEABF0 /* RealmSwift in Frameworks */,
 				823F1AC82806C9BD0066F85C /* RxSwift in Frameworks */,
 				82D288882800654800BEABF0 /* Swinject in Frameworks */,
+				821A3C1E2823F5C500AA3E83 /* RxDataSources in Frameworks */,
 				824BE9602809AF2B00929911 /* ReactiveCocoa in Frameworks */,
 				82D2888D2800656700BEABF0 /* SwinjectStoryboard in Frameworks */,
 			);
@@ -207,6 +215,9 @@
 			children = (
 				82F8399E2796DB990068875F /* completed */,
 				82F839A22796DB990068875F /* incomplete */,
+				8219E842282D2F460014F020 /* TaskSection.swift */,
+				8219E844282D2FA30014F020 /* TaskItem.swift */,
+				8219E846282D3E5D0014F020 /* TaskCount.swift */,
 			);
 			path = adapter;
 			sourceTree = "<group>";
@@ -307,6 +318,7 @@
 				823F1AC72806C9BD0066F85C /* RxSwift */,
 				823F1ACA2806C9EC0066F85C /* RxRealm */,
 				824BE95F2809AF2B00929911 /* ReactiveCocoa */,
+				821A3C1D2823F5C500AA3E83 /* RxDataSources */,
 			);
 			productName = TodoListUiKit;
 			productReference = 821737722784717A004D0BA6 /* TodoListUiKit.app */;
@@ -343,6 +355,7 @@
 				823F1AC62806C9BD0066F85C /* XCRemoteSwiftPackageReference "RxSwift" */,
 				823F1AC92806C9EC0066F85C /* XCRemoteSwiftPackageReference "RxRealm" */,
 				824BE95E2809AF2B00929911 /* XCRemoteSwiftPackageReference "ReactiveCocoa" */,
+				821A3C1C2823F5C500AA3E83 /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			productRefGroup = 821737732784717A004D0BA6 /* Products */;
 			projectDirPath = "";
@@ -377,14 +390,17 @@
 				8232DA1B27F59D2700CA82FB /* Task.swift in Sources */,
 				8217377A2784717A004D0BA6 /* ViewController.swift in Sources */,
 				82580FF727F5D3DA00D4B6B6 /* CreateViewController.swift in Sources */,
+				8219E843282D2F460014F020 /* TaskSection.swift in Sources */,
 				82A9768528046E3000FF2A7B /* DateUtils.swift in Sources */,
 				82580FF927F5D42100D4B6B6 /* CreateInteractor.swift in Sources */,
 				821737762784717A004D0BA6 /* AppDelegate.swift in Sources */,
+				8219E845282D2FA30014F020 /* TaskItem.swift in Sources */,
 				821737782784717A004D0BA6 /* SceneDelegate.swift in Sources */,
 				8232DA2127F5A21C00CA82FB /* TaskRepository.swift in Sources */,
 				82F839B02796DB990068875F /* MainViewController.swift in Sources */,
 				8232DA1F27F5A1FC00CA82FB /* TaskEntity.swift in Sources */,
 				8232DA2527F5A3C900CA82FB /* DetailsInteractor.swift in Sources */,
+				8219E847282D3E5D0014F020 /* TaskCount.swift in Sources */,
 				82580FFD27F5EB6500D4B6B6 /* DetailsViewModel.swift in Sources */,
 				8232DA1D27F59EF500CA82FB /* MainInteractor.swift in Sources */,
 				82F839B72796DB990068875F /* MainViewModel.swift in Sources */,
@@ -621,6 +637,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		821A3C1C2823F5C500AA3E83 /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		823F1AC62806C9BD0066F85C /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift";
@@ -672,6 +696,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		821A3C1D2823F5C500AA3E83 /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 821A3C1C2823F5C500AA3E83 /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
+		};
 		823F1AC72806C9BD0066F85C /* RxSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 823F1AC62806C9BD0066F85C /* XCRemoteSwiftPackageReference "RxSwift" */;

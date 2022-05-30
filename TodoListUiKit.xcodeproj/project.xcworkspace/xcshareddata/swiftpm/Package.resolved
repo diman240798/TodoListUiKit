@@ -38,6 +38,15 @@
         }
       },
       {
+        "package": "RxDataSources",
+        "repositoryURL": "https://github.com/RxSwiftCommunity/RxDataSources",
+        "state": {
+          "branch": "main",
+          "revision": "bbfea3869f5492580563c676acda729c64fa489e",
+          "version": null
+        }
+      },
+      {
         "package": "RxRealm",
         "repositoryURL": "https://github.com/RxSwiftCommunity/RxRealm",
         "state": {
