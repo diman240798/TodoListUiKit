@@ -9,7 +9,14 @@ import Foundation
 import RxSwift
 
 protocol TaskRepository {
+    
     func createTask(_ task: Task)
-    func getTask(_ id: String) -> Observable<Task>
+    
+    func getTask(_ id: String) -> Single<Task>
+    
     func getTasks() -> Observable<[Task]>
+    
+    func setTaskComplete(_ taskId: Int) -> Single<Bool>
+    
+    func setTaskIncomplete(_ taskId: Int) -> Single<Bool>
 }

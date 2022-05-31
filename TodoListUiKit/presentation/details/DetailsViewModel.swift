@@ -7,8 +7,11 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 class DetailsViewModel {
+    
+    let task = BehaviorSubject(value: Task("", ""))
     
     let interactor: DetailsInteractor
     
@@ -17,6 +20,17 @@ class DetailsViewModel {
     }
     
     func getTask(id: String) {
-//        return interactor.getTask(id)
+        interactor.getTask(id)
+            .subscribe(onSuccess: { task in
+                self.task.onNext(task)
+            })
+    }
+    
+    func setTaskComplete(_ taskId: Int, _ isComplete: Bool) -> Single<Bool> {
+        if isComplete {
+            return interactor.setTaskIncomplete(taskId)
+        } else {
+            return interactor.setTaskComplete(taskId)
+        }
     }
 }

@@ -9,9 +9,12 @@ import Foundation
 import RxSwift
 
 protocol DetailsInteractor {
-    func getTask(_ id: String) -> Observable<Task>
-    func setTaskComplete(taskId: Int)
-    func setTaskIncomplete(taskId: Int)
+    
+    func getTask(_ id: String) -> Single<Task>
+    
+    func setTaskComplete(_ taskId: Int) -> Single<Bool>
+    
+    func setTaskIncomplete(_ taskId: Int) -> Single<Bool>
 }
 
 class DetailsInteractorImpl : DetailsInteractor {
@@ -22,17 +25,15 @@ class DetailsInteractorImpl : DetailsInteractor {
         self.repo = repo
     }
     
-    func getTask(_ id: String) -> Observable<Task> {
+    func getTask(_ id: String) -> Single<Task> {
         return repo.getTask(id)
     }
     
-    func setTaskComplete(taskId: Int) {
-        
+    func setTaskComplete(_ taskId: Int) -> Single<Bool> {
+        return repo.setTaskComplete(taskId)
     }
     
-    func setTaskIncomplete(taskId: Int) {
-        
+    func setTaskIncomplete(_ taskId: Int) -> Single<Bool> {
+        return repo.setTaskIncomplete(taskId)
     }
-    
-    
 }

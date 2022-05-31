@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import RxSwift
 
 class DetailsViewController : ViewController {
+    
+    let disposeBag = DisposeBag()
     
     @IBOutlet weak var dateText: UILabel!
     @IBOutlet weak var nameText: UITextField!
@@ -28,8 +31,15 @@ class DetailsViewController : ViewController {
     }
     
     func loadData() {
-//        let task = viewModel.getTask(id: taskId)
-//        nameText.text = task.name
-//        descriptionText.text = task.description
+        viewModel.getTask(id: taskId)
+        
+        viewModel.task
+            .subscribe(onNext: {task in
+                self.nameText.text = task.name
+                self.descriptionText.text = task.description
+                
+            })
+            .disposed(by: disposeBag)
+        
     }
 }

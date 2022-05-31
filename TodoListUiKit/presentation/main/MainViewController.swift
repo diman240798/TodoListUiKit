@@ -106,6 +106,8 @@ extension MainViewController: UITableViewDelegate {
                 switch(taskItem) {
                 case .completed(let task):
                     self?.onTaskClicked(task)
+                case .incomplete(let task):
+                    self?.onTaskClicked(task)
                 default:
                     break
                 }
