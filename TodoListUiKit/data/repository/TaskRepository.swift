@@ -12,11 +12,11 @@ protocol TaskRepository {
     
     func createTask(_ task: Task)
     
-    func getTask(_ id: String) -> Single<Task>
+    func getTask(_ id: String) -> Observable<Task>
     
     func getTasks() -> Observable<[Task]>
     
-    func setTaskComplete(_ taskId: Int) -> Single<Bool>
+    func setTaskComplete(_ taskId: String) -> Single<Bool>
     
-    func setTaskIncomplete(_ taskId: Int) -> Single<Bool>
+    func setTaskIncomplete(_ taskId: String) -> Single<Bool>
 }

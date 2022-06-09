@@ -27,13 +27,9 @@ class TaskRepositoryRealmImplementaiton : TaskRepository {
         try! realm.commitWrite()
     }
     
-    func getTask(_ id: String) -> Single<Task> {
-        
-        return Observable.from(realm.objects(TaskRealmEntity.self))
-            .filter { $0.id == id }
-            .take(1)
+    func getTask(_ id: String) -> Observable<Task> {
+        return getTaskEntity(id)
             .map {$0.toTask()}
-            .asSingle()
     }
     
     func getTasks() -> Observable<[Task]> {
@@ -41,37 +37,35 @@ class TaskRepositoryRealmImplementaiton : TaskRepository {
             .map { $0.map { $0.toTask() } }
     }
     
-    func setTaskComplete(_ taskId: Int) -> Single<Bool> {
-        return Single<Bool>.create { single in
-            do {
-                try self.setTaskComplete(taskId, true)
-                single(.success(true))
-                
-            } catch {
-                single(.success(false))
+    func setTaskComplete(_ taskId: String) -> Single<Bool> {
+        return setTaskComplete(taskId, true)
+    }
+    
+    func setTaskIncomplete(_ taskId: String) -> Single<Bool> {
+        return setTaskComplete(taskId, false)
+    }
+    
+    private func setTaskComplete(_ taskId: String, _ isComplete: Bool) -> Single<Bool> {
+        return getTaskEntity(taskId)
+            .map { task in
+                do {
+                    try self.writeTaskComplete(task, isComplete)
+                    return true
+                } catch {
+                    return false
+                }
             }
-            return Disposables.create()
+            .asSingle()
+    }
+    
+    private func writeTaskComplete(_ task: TaskRealmEntity, _ isComplete: Bool) throws {
+        try realm.write {
+            task.isComplete = isComplete
         }
     }
     
-    func setTaskIncomplete(_ taskId: Int)  -> Single<Bool> {
-        return Single<Bool>.create { single in
-            do {
-                try self.setTaskComplete(taskId, false)
-                single(.success(true))
-                
-            } catch {
-                single(.success(false))
-            }
-            return Disposables.create()
-        }
-    }
-    
-    private func setTaskComplete(_ taskId: Int, _ isComplete: Bool) throws {
-        realm.beginWrite()
-        var task = realm.object(ofType: TaskRealmEntity.self, forPrimaryKey: taskId)!
-        task.isComplete = isComplete
-        realm.add(task, update: Realm.UpdatePolicy.modified)
-        try realm.commitWrite()
+    private func getTaskEntity(_ id: String) -> Observable<TaskRealmEntity> {
+        let entity = realm.object(ofType: TaskRealmEntity.self, forPrimaryKey: id)!
+        return Observable.from(object: entity)
     }
 }

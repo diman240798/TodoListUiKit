@@ -35,6 +35,7 @@
 		82580FF927F5D42100D4B6B6 /* CreateInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82580FF827F5D42100D4B6B6 /* CreateInteractor.swift */; };
 		82580FFB27F5EB5400D4B6B6 /* CreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82580FFA27F5EB5400D4B6B6 /* CreateViewModel.swift */; };
 		82580FFD27F5EB6500D4B6B6 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82580FFC27F5EB6500D4B6B6 /* DetailsViewModel.swift */; };
+		82881FC5284F989200EBE120 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82881FC4284F989200EBE120 /* CheckBox.swift */; };
 		82A9768528046E3000FF2A7B /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A9768428046E3000FF2A7B /* DateUtils.swift */; };
 		82CC493627F3396A008ABF94 /* CompletedTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CC493427F3396A008ABF94 /* CompletedTaskCell.swift */; };
 		82CC493727F3396A008ABF94 /* CompletedTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82CC493527F3396A008ABF94 /* CompletedTaskCell.xib */; };
@@ -86,6 +87,7 @@
 		82580FF827F5D42100D4B6B6 /* CreateInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInteractor.swift; sourceTree = "<group>"; };
 		82580FFA27F5EB5400D4B6B6 /* CreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewModel.swift; sourceTree = "<group>"; };
 		82580FFC27F5EB6500D4B6B6 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
+		82881FC4284F989200EBE120 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		82A9768428046E3000FF2A7B /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
 		82CC493427F3396A008ABF94 /* CompletedTaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTaskCell.swift; sourceTree = "<group>"; };
 		82CC493527F3396A008ABF94 /* CompletedTaskCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompletedTaskCell.xib; sourceTree = "<group>"; };
@@ -172,6 +174,14 @@
 			path = repository;
 			sourceTree = "<group>";
 		};
+		82881FC3284F988300EBE120 /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				82881FC4284F989200EBE120 /* CheckBox.swift */,
+			);
+			path = ui;
+			sourceTree = "<group>";
+		};
 		82A9768328046E1B00FF2A7B /* utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +193,7 @@
 		82F839992796DB990068875F /* presentation */ = {
 			isa = PBXGroup;
 			children = (
+				82881FC3284F988300EBE120 /* ui */,
 				82A9768328046E1B00FF2A7B /* utils */,
 				82F8399A2796DB990068875F /* details */,
 				82F8399B2796DB990068875F /* main */,
@@ -390,6 +401,7 @@
 				8232DA1B27F59D2700CA82FB /* Task.swift in Sources */,
 				8217377A2784717A004D0BA6 /* ViewController.swift in Sources */,
 				82580FF727F5D3DA00D4B6B6 /* CreateViewController.swift in Sources */,
+				82881FC5284F989200EBE120 /* CheckBox.swift in Sources */,
 				8219E843282D2F460014F020 /* TaskSection.swift in Sources */,
 				82A9768528046E3000FF2A7B /* DateUtils.swift in Sources */,
 				82580FF927F5D42100D4B6B6 /* CreateInteractor.swift in Sources */,

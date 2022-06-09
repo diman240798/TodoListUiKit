@@ -21,12 +21,12 @@ class DetailsViewModel {
     
     func getTask(id: String) {
         interactor.getTask(id)
-            .subscribe(onSuccess: { task in
+            .subscribe(onNext: { task in
                 self.task.onNext(task)
             })
     }
     
-    func setTaskComplete(_ taskId: Int, _ isComplete: Bool) -> Single<Bool> {
+    func setTaskComplete(_ taskId: String, _ isComplete: Bool) -> Single<Bool> {
         if isComplete {
             return interactor.setTaskIncomplete(taskId)
         } else {

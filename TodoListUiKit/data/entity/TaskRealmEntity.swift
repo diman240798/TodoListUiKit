@@ -13,6 +13,10 @@ class TaskRealmEntity : Object {
     @objc dynamic var name: String = ""
     @objc dynamic var descriptionText: String = ""
     @objc dynamic var isComplete: Bool = false
+    
+    override class func primaryKey() -> String? {
+        return "id"
+    }
 }
 
 extension TaskRealmEntity {

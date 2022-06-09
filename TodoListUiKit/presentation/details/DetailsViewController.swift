@@ -15,7 +15,7 @@ class DetailsViewController : ViewController {
     @IBOutlet weak var dateText: UILabel!
     @IBOutlet weak var nameText: UITextField!
     @IBOutlet weak var descriptionText: UITextView!
-    
+    @IBOutlet weak var completed: CheckBox!
     
     var viewModel: DetailsViewModel!
     
@@ -37,9 +37,16 @@ class DetailsViewController : ViewController {
             .subscribe(onNext: {task in
                 self.nameText.text = task.name
                 self.descriptionText.text = task.description
-                
+                self.completed.isChecked = task.isComplete
             })
             .disposed(by: disposeBag)
         
+        self.completed.setOnCheckedListener { checked in
+            self.viewModel.setTaskComplete(self.taskId, checked)
+                .subscribe(onSuccess: {success in
+                    // ignored
+                })
+                .disposed(by: self.disposeBag)
+        }
     }
 }

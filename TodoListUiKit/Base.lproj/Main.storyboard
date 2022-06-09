@@ -217,6 +217,17 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Completed:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZQv-pG-EGl">
+                                <rect key="frame" x="16" y="614.5" width="70.5" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.3411764706" green="0.3411764706" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YlE-cy-oFq" customClass="CheckBox" customModule="TodoListUiKit" customModuleProvider="target">
+                                <rect key="frame" x="94.5" y="602.5" width="24" height="14"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="rPq-6u-VgJ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -224,14 +235,18 @@
                             <constraint firstItem="rPq-6u-VgJ" firstAttribute="trailing" secondItem="CAr-Ff-GmI" secondAttribute="trailing" constant="16" id="7QS-I9-9f2"/>
                             <constraint firstItem="CAr-Ff-GmI" firstAttribute="leading" secondItem="rPq-6u-VgJ" secondAttribute="leading" constant="16" id="7eI-lr-VjH"/>
                             <constraint firstItem="SSO-no-9Tz" firstAttribute="top" secondItem="fcL-pB-rjE" secondAttribute="bottom" constant="16" id="CIJ-4E-7MW"/>
+                            <constraint firstItem="YlE-cy-oFq" firstAttribute="leading" secondItem="ZQv-pG-EGl" secondAttribute="trailing" constant="8" id="Dbc-E2-HXz"/>
                             <constraint firstItem="aq9-Gg-cPO" firstAttribute="top" secondItem="rPq-6u-VgJ" secondAttribute="top" constant="16" id="F1C-kK-Lub"/>
                             <constraint firstItem="rPq-6u-VgJ" firstAttribute="trailing" secondItem="mSm-Ff-quk" secondAttribute="trailing" constant="16" id="F1b-Bq-Kul"/>
                             <constraint firstItem="mSm-Ff-quk" firstAttribute="top" secondItem="h48-U8-NKg" secondAttribute="bottom" constant="8" id="Hey-yj-XWA"/>
+                            <constraint firstItem="ZQv-pG-EGl" firstAttribute="leading" secondItem="rPq-6u-VgJ" secondAttribute="leading" constant="16" id="LjN-4h-eXT"/>
                             <constraint firstItem="h48-U8-NKg" firstAttribute="top" secondItem="CAr-Ff-GmI" secondAttribute="bottom" constant="8" id="LuZ-hZ-KyF"/>
                             <constraint firstItem="SSO-no-9Tz" firstAttribute="leading" secondItem="rPq-6u-VgJ" secondAttribute="leading" constant="16" id="XUu-RY-mlO"/>
                             <constraint firstItem="aq9-Gg-cPO" firstAttribute="leading" secondItem="rPq-6u-VgJ" secondAttribute="leading" constant="16" id="bEu-l4-1Do"/>
                             <constraint firstItem="fcL-pB-rjE" firstAttribute="top" secondItem="aq9-Gg-cPO" secondAttribute="bottom" constant="16" id="ckz-xh-DwB"/>
                             <constraint firstItem="mSm-Ff-quk" firstAttribute="leading" secondItem="rPq-6u-VgJ" secondAttribute="leading" constant="16" id="dFd-ec-lJ3"/>
+                            <constraint firstItem="ZQv-pG-EGl" firstAttribute="top" secondItem="mSm-Ff-quk" secondAttribute="bottom" constant="16" id="dMY-Ty-mq2"/>
+                            <constraint firstItem="YlE-cy-oFq" firstAttribute="top" secondItem="mSm-Ff-quk" secondAttribute="bottom" constant="4" id="rqW-PM-99X"/>
                             <constraint firstItem="fcL-pB-rjE" firstAttribute="leading" secondItem="rPq-6u-VgJ" secondAttribute="leading" constant="16" id="sH9-s1-3a9"/>
                             <constraint firstItem="h48-U8-NKg" firstAttribute="leading" secondItem="rPq-6u-VgJ" secondAttribute="leading" constant="16" id="t6k-Ai-WA7"/>
                             <constraint firstItem="CAr-Ff-GmI" firstAttribute="top" secondItem="SSO-no-9Tz" secondAttribute="bottom" constant="8" id="tjD-I3-E5p"/>
@@ -239,6 +254,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="74n-Zf-v0L"/>
                     <connections>
+                        <outlet property="completed" destination="YlE-cy-oFq" id="iMz-mD-z6Q"/>
                         <outlet property="dateText" destination="aq9-Gg-cPO" id="WFq-HN-AFs"/>
                         <outlet property="descriptionText" destination="mSm-Ff-quk" id="Y1q-JC-e59"/>
                         <outlet property="nameText" destination="CAr-Ff-GmI" id="TEO-Zb-lq4"/>
